@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import './meal_details_screen.dart';
 import './models/meal.dart';
 
 class MealItem extends StatelessWidget {
-  void selectMeal() {}
+  void selectMeal(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(
+      MealDetailsScreen.routeName,
+      arguments: meal,
+    );
+  }
+
   final Meal meal;
   MealItem(this.meal);
 
@@ -98,7 +105,7 @@ class MealItem extends StatelessWidget {
           ],
         ),
       ),
-      onTap: selectMeal,
+      onTap: () => selectMeal(context),
     );
   }
 }
