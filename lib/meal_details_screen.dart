@@ -74,13 +74,28 @@ class MealDetailsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        'Ingredients: ',
-                        style: TextStyle(color: Colors.grey),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          'Ingredients: ',
+                          style: TextStyle(color: Colors.grey),
+                        ),
                       ),
                       ...meal.ingredients
                           .map((ingredient) => Text(
                                 ingredient,
+                              ))
+                          .toList(),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5),
+                        child: Text(
+                          'Steps: ',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      ...meal.steps
+                          .map((step) => Text(
+                                step,
                               ))
                           .toList(),
                     ]),
