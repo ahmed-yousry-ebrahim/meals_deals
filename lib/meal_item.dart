@@ -13,22 +13,6 @@ class MealItem extends StatelessWidget {
   final Meal meal;
   MealItem(this.meal);
 
-  String get complexityText {
-    switch (meal.complexity) {
-      case Complexity.Simple:
-        return 'Simple';
-        break;
-      case Complexity.Challenging:
-        return 'Challenging';
-        break;
-      case Complexity.Hard:
-        return 'Hard';
-        break;
-      default:
-        return 'Unknown';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -97,7 +81,7 @@ class MealItem extends StatelessWidget {
                         SizedBox(
                           width: 6,
                         ),
-                        Text(complexityText),
+                        Text(meal.complexityText),
                       ],
                     )
                   ]),
