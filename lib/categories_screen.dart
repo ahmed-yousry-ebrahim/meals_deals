@@ -8,7 +8,6 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Meals & Deals')),
       body: Container(
-        color: Color.fromARGB(212, 248, 248, 247),
         child: GridView(
           padding: EdgeInsets.all(25),
           children: DUMMY_CATEGORIES
