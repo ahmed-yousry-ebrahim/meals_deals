@@ -18,10 +18,13 @@ class CategoryMealsScreen extends StatelessWidget {
     final categoryMelas = DUMMY_MEALS
         .where(
           (element) => ((element.categories.contains(categoryId)) &&
-              (element.isVegetarian == settings.vegeterian) &&
-              (element.isVegan == settings.vegan) &&
-              (element.isLactoseFree == settings.lactoseFree) &&
-              (element.isGlutenFree == settings.glutenFree)),
+              (!settings.vegeterian ||
+                  element.isVegetarian == settings.vegeterian) &&
+              (!settings.vegan || element.isVegan == settings.vegan) &&
+              (!settings.lactoseFree ||
+                  element.isLactoseFree == settings.lactoseFree) &&
+              (!settings.glutenFree ||
+                  element.isGlutenFree == settings.glutenFree)),
         )
         .toList();
     return Scaffold(
