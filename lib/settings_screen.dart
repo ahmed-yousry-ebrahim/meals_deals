@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './main_drawer.dart';
+import './providers/settings.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings';
@@ -9,13 +11,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _vegeterian = false;
-  bool _vegan = false;
-  bool _lactoseFree = false;
-  bool _glutenFree = false;
-
   @override
   Widget build(BuildContext context) {
+    final settings = Provider.of<Settings>(context);
+
+    bool _vegeterian = settings.vegeterian;
+    bool _vegan = settings.vegan;
+    bool _lactoseFree = settings.lactoseFree;
+    bool _glutenFree = settings.glutenFree;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -48,6 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         setState(
                           () {
                             _vegeterian = value;
+                            settings.toggleVegeterian();
                           },
                         )
                       })),
@@ -60,6 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         setState(
                           () {
                             _vegan = value;
+                            settings.toggleVegan();
                           },
                         )
                       })),
@@ -72,6 +78,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         setState(
                           () {
                             _lactoseFree = value;
+                            settings.toggleLactoseFree();
                           },
                         )
                       })),
@@ -84,6 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         setState(
                           () {
                             _glutenFree = value;
+                            settings.toggleGlutenFree();
                           },
                         )
                       })),

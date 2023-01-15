@@ -4,9 +4,20 @@ import './tabs_screen.dart';
 import './meal_details_screen.dart';
 import './category_meals_screen.dart';
 import './categories_screen.dart';
+import './providers/settings.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MealsApp());
+  runApp(
+    /// Providers are above [MyApp] instead of inside it, so that tests
+    /// can use [MyApp] while mocking the providers
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Settings()),
+      ],
+      child: const MealsApp(),
+    ),
+  );
 }
 
 class MealsApp extends StatelessWidget {
