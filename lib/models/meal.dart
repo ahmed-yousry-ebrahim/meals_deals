@@ -54,7 +54,7 @@ class Meal {
     data['ingredients'] = ingredients;
     data['steps'] = steps;
     data['duration'] = duration;
-    data['complexity'] = complexity;
+    data['complexity'] = complexityText;
     data['isGlutenFree'] = isGlutenFree;
     data['isLactoseFree'] = isLactoseFree;
     data['isVegan'] = isVegan;

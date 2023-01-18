@@ -6,8 +6,12 @@ import './category_meals_screen.dart';
 import './categories_screen.dart';
 import './providers/settings.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
+import 'package:hive/hive.dart';
 
-void main() {
+void main() async {
+  var path = Directory.current.path;
+  Hive.init(path);
   runApp(
     /// Providers are above [MyApp] instead of inside it, so that tests
     /// can use [MyApp] while mocking the providers
@@ -27,6 +31,7 @@ class MealsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Meals & Deals',
       theme: ThemeData(
         primarySwatch: Colors.red,
