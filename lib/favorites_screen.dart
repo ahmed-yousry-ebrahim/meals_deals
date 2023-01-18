@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import './meal_item.dart';
+import './models/meal.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -9,13 +11,18 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  late final Box favorites;
+  Box? _favorites;
+  late Future _boxLoadFuture;
+
+  Future _openBox() async {
+    _favorites = await Hive.openBox('favorites');
+    return;
+  }
 
   @override
   void initState() {
     super.initState();
-    // Get reference to an already opened box
-    favorites = Hive.box('favorites');
+    _boxLoadFuture = _openBox();
   }
 
   @override
@@ -27,6 +34,25 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return FutureBuilder(
+        future: _boxLoadFuture,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // while waiting for `Hive.openBox()` to finish
+            return const CircularProgressIndicator();
+          } else {
+            if (snapshot.hasError) {
+              // if `Hive.openBox()` threw an error
+              return Center(child: Text('Error:\n\n ${snapshot.error}'));
+            } else {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  return MealItem(Meal.fromJson(_favorites?.getAt(index)));
+                },
+                itemCount: _favorites?.length,
+              );
+            }
+          }
+        });
   }
 }

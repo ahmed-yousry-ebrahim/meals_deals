@@ -78,7 +78,7 @@ class Meal {
     return data;
   }
 
-  Meal.fromJson(Map<String, dynamic> data)
+  Meal.fromJson(Map<dynamic, dynamic> data)
       : id = data['id'],
         categories = data['categories'],
         title = data['title'],
