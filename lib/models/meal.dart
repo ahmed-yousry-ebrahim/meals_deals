@@ -45,6 +45,22 @@ class Meal {
     }
   }
 
+  static Complexity complexityLevel(String complexityText) {
+    switch (complexityText) {
+      case 'Simple':
+        return Complexity.Simple;
+        break;
+      case 'Challenging':
+        return Complexity.Challenging;
+        break;
+      case 'Hard':
+        return Complexity.Hard;
+        break;
+      default:
+        return Complexity.Simple;
+    }
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = id;
@@ -70,7 +86,7 @@ class Meal {
         ingredients = data['ingredients'],
         steps = data['steps'],
         duration = data['duration'],
-        complexity = data['complexity'],
+        complexity = Meal.complexityLevel(data['complexity']),
         isGlutenFree = data['isGlutenFree'],
         isLactoseFree = data['isLactoseFree'],
         isVegan = data['isVegan'],
