@@ -44,4 +44,35 @@ class Meal {
         return 'Unknown';
     }
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = id;
+    data['categories'] = categories;
+    data['title'] = title;
+    data['imageUrl'] = imageUrl;
+    data['ingredients'] = ingredients;
+    data['steps'] = steps;
+    data['duration'] = duration;
+    data['complexity'] = complexity;
+    data['isGlutenFree'] = isGlutenFree;
+    data['isLactoseFree'] = isLactoseFree;
+    data['isVegan'] = isVegan;
+    data['isVegetarian'] = isVegetarian;
+    return data;
+  }
+
+  Meal.fromJson(Map<String, dynamic> data)
+      : id = data['id'],
+        categories = data['categories'],
+        title = data['title'],
+        imageUrl = data['imageUrl'],
+        ingredients = data['ingredients'],
+        steps = data['steps'],
+        duration = data['duration'],
+        complexity = data['complexity'],
+        isGlutenFree = data['isGlutenFree'],
+        isLactoseFree = data['isLactoseFree'],
+        isVegan = data['isVegan'],
+        isVegetarian = data['isVegetarian'];
 }
